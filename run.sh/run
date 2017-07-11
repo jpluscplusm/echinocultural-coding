@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-set -eu
 
 make_temp_file() {
   mktemp $1/tmp-XXXXXXXX
