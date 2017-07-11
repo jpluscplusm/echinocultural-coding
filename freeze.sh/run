@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+freeze_if_file() {
+  [ -s "$1" -a -f "$1" ] && cat $1 || true
+}
+
+freeze_files() {
+  for file in $@; do
+    freeze_if_file $file
+  done
+}
+
+base_directory() {
+  dirname $1
+}
+
+main() {
+  local my=$(base_directory $1)
+  freeze_files \
+    $my/shell \
+    $my/functions/* \
+    $my/functions/imports/*/* \
+    $my/scripts/main
+}
+
+set -eu
+main $0
