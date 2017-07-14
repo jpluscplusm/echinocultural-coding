@@ -12,7 +12,7 @@ objects := $(wildcard $(hashbang) $(main_func) $(functions) $(main_script))
 
 script: $(objects) ## Build the script
 	cat $(objects) > $@
-	chmod u+x $@
+	@chmod u+x $@
 -include $(tests_make)
 test: ## Run the tests in tests/Makefile
 help:
