@@ -23,5 +23,5 @@ $(bootstrap):
 	@echo Creating $@
 	@echo $(ARCHIVE) | base64 --decode | gunzip | cpio --quiet -d -i $@
 bootstrap-archive:
-	echo $(bootstrap) | tr ' ' \\n | cpio --quiet -o | gzip -9 | base64
+	@echo $(bootstrap) | tr ' ' '\n' | cpio --quiet -o | gzip -9 | base64 | tr -d '\n'; echo
 ARCHIVE="H4sIAIg9aVkCA+WRS0+DQBDHOe+nGLAmbbSyLyDpSQ8eTPTS1HND6bRshKXpLqbG+N3l0Qdpm8jdgbAzP2Yz/5mhEa2e1mhtjFEaSll5UdgQLltO20MwwTkTNGpBSA/GuUkxy5wb1y/N1l8o7aP+BJMSel6D96khQhk2mEWHEkyEq1InVhXa+HmstFN/hiP4JgCYpAV4s1QZqF6bItQ/4XDhHhao9Bq2pYbYwrtWO7AqRxgMDSaFXpq5UTrBOW6KJB09eOTnUrjoKTxqsJDH4cjgJBx3cb7JcH4kzhUB+6aWsUW4uzXXxMg+YrgQexB0NtXMzqCFMZakGZM3ePQuSwS9+mVBu6LuooRFY43/Fn/gSmXo1OEESq3suHZBaYvrbVz33wLzZSzmjU/IMW9CyHlmhTq5VdSqpn8bu05FJ5hNn15en6eu6zr/w34B25wllwAEAAA="
