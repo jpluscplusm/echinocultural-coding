@@ -1,0 +1,12 @@
+#!/usr/bin/env bats
+
+@test "seconds_since_epoch returns a number" {
+  . functions/examples
+  [ "$(seconds_since_epoch)" -gt 1500000000 ]
+  [ "$(seconds_since_epoch)" -lt 2000000000 ]
+}
+
+@test "seconds_since_epoch increments over time" {
+  . functions/examples
+  [ "$(seconds_since_epoch)" -lt "$(sleep 1; seconds_since_epoch)" ]
+}

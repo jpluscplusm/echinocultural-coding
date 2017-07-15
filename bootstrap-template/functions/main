@@ -1,0 +1,3 @@
+main() {
+  echo "This is the main function, being run at Unix time $(seconds_since_epoch)."
+}

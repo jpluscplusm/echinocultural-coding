@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+main() {
+  echo "This is the main function, being run at Unix time $(seconds_since_epoch)."
+}
+seconds_since_epoch() {
+  date +%s
+}
+set -eu
+main "$@"

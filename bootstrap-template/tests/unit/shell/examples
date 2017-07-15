@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+echo Shell tests start
+
+. functions/examples
+[ "$(seconds_since_epoch)" -gt          100 ] && echo " Numeric test 1 passed"
+[ "$(seconds_since_epoch)" -lt 100000000000 ] && echo " Numeric test 2 passed"
+
+echo Shell tests passed
