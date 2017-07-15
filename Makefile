@@ -6,21 +6,21 @@ hashbang    := shell
 main_script := main
 main_func   := functions/main
 functions   := $(filter-out $(main_func), $(wildcard functions/*))
-tests_make  := tests/Makefile
 sources     := $(wildcard $(hashbang) $(main_func) $(functions) $(main_script))
 
 script: $(sources) ## Assembles the script
 	cat $(sources) >$@
 	@chmod u+x $@
--include $(tests_make)
-test: ## Runs the tests in tests/Makefile
+test:
+-include tests/*.mk
 help:
 	@awk -F":.*## " '$$2&&$$1~/^[a-zA-Z_%-]+/{printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-bootstrap := $(hashbang) $(main_func) $(main_script) $(tests_make)
-bootstrap += functions/examples tests/unit/bats/examples tests/unit/shell/examples
+bootstrap := $(hashbang) $(main_func) $(main_script) functions/examples
+bootstrap += tests/examples.mk tests/unit/bats/examples tests/unit/shell/examples
 bootstrap: $(bootstrap) ## Creates a script, function & test skeleton structure
 $(bootstrap):
 	@echo Creating $@
 	@echo $(ARCHIVE) | base64 --decode | gunzip | cpio --quiet -d -i $@
-ARCHIVE="H4sIABsBalkCA+1U32/aMBDmdf4rjqyrWnU0sfNLAmnqHvYwadtD1z1tVRXCQawlBsUOo6r432c7kAHJCt3zDgT2+Xz33X139mJPf2rxjFDqeVEQ6FUcWQ0Lar1X//nUZywMQ1YrIm8rjMkM87z3uu9WsnTHXLgoliAz4h3GYC+KQeNtCOpH00qkis+FdIuEi575ubiEJwKAaTYH5y7jEvRXZQjmELYX3sIYuZhBWQlIFHwTfAWKFwhnFxLTuZjIB8lFig+4mKfZ5bVD1m3g/mnAI1orwp3iWLgSFQywIhaZc3bjtEMEp4SIgpDF+7UJWKBQKul+Tn7ilOfYM9shVIKrgVkCFwpnZWKKUSvko1RY2DUhjd0QLI8DXCXFIkcJ40TJZkcOvQzJjpshIfuXh+TVlIsJ1NBMDNcauDBQjwuEqS7HClN4WsOPEdmLpK/yKfzKeJpZCPDOneDSFVWejwy9mtoDz8bq0LG9qb1fwUjbt8sdvqgVmd8wGoR/WnELudfRSZvunCQK4eqN7Oqq6CTKWVBj8OkWQkj9w+wbJAdTaA4JubG0Ox0ooURVlUJCAqIqxlg6FvU1tJPU6u+6dzunxoHBTAFt+h7uj1jnCpi3Y71+FqRellig0JTOl1ja+f1noDq0OcwRF0BH0G1138VXrBmIj/NFI1sHv0nQj+PWHPyNMP1sbh8LYl+2r8a87naQKin1yHYmfYSbRqipN5yfb95N+FIVWPLURgAKi0RKnDjkSAWbXvSec8cad+1c6pNNkb3jQru1/s7m7vb9x08fbvv9fu+/HJHfwx5bOwAIAAA="
+-include bootstrap-generator.mk
+ARCHIVE="H4sIAGhialkCA+1U32/aMBDmdf4rjqyrWnWQ2PklgTR1D3uoNO2h6562qgrhINYSg2Kno6r432c7JKWQAdvzDgT2+Xz3+bvP9mJPf2rzjFHqeVEQ6FEcWQ8Lar9X//nUZywMQ1Y7Iq8xxmSGed5723crWboTLlwUjyAz4u3WYCfUCGhEPd9O46YE9aNZJVLFF0K6RcJFz/xcXMIzAcA0W4Bzl3EJ+qsyBLMIzYb3MEEu5lBWAhIF3wRfgeIFwtmFxHQhpvJBcpHiAy4XaXY5dMh6H7h/CnCNO6zn4RY5Fq5EBQOsiEXmnF07+yWCv+Kf+W2JIHzhBldJscxR9jqOtqFrmiiEq3ey65jhKRiiIGT1ImshsEChVC/1h8XPnvGMoBJcDcwQuFA4LxMDtHbIJ6mwsGNC2rgRWDkNmlQwSZRsZ2Q3y4hspRkR8nrziLyZcTGFGp2p4doAFwbqaYkw011ZYQrPa/gxJq8q6a18Br8ynmYWAnxwp/joiirPx0ZlWmE7mU3UbmK7U2e/grGO32c8OolxFtRd92nDeEj93cpt73cuolkk5NpS7nToAkpUVSkkJCCqYoKlY3UyhH1Zafd3Ld/Oi+PAYK6AttKH+yPRuYJWQCZ6fRCkHpZYoNB0Lh6xtFf4n4Hq0mYxR1wCHUN31H3XDYl1B+Lj/aKR5cFvD+jH8Z4G/9Qw/XI27wWxj9tXE14rDaRKSn1dOg99pDetUcM3nJ9vnk74UhVY8tRWAArLREqcOuQIg60WvUPpWJtu/yz1yoZk77jRbq+/Nbm7/Xjz+dNtv9/v/bdD9hvWNgYDAAgAAA=="
