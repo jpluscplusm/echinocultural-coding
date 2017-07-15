@@ -1,6 +1,6 @@
 .PHONY: help test bootstrap
 .DEFAULT_GOAL := help
-MAKEFLAGS     += --no-builtin-rules --no-builtin-variables --no-print-directory --warn-undefined-variables
+MAKEFLAGS     += --no-builtin-rules --no-builtin-variables --warn-undefined-variables
 
 hashbang    := shell
 main_script := main
