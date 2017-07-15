@@ -14,7 +14,7 @@ $(newfile): $(thisfile) $(bootstrap) ## Creates new-Makefile from the bootstrap 
 	grep -v ^ARCHIVE= $(makefile) >$@
 	echo ARCHIVE=\"$$(echo $(bootstrap) | tr ' ' '\n' | cpio --quiet -o | gzip -9 | base64 | tr -d '\n')\" >>$@
 
-release-candidate: test-bootstrap-files test-new-makefile
+release-candidate: test-bootstrap-files test-new-makefile ## Create a release candidate new-Makefile if tests pass
 test-bootstrap-files: test ## Runs the bootstrap files tests, before packaging
 $(testdir):
 	mkdir -p $@
