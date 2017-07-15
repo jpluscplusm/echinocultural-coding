@@ -7,4 +7,4 @@ system-test:
 shell-examples:
 	find tests/unit/shell/ -type f -exec {} \;
 bats-examples:
-	if which -s bats; then find tests/unit/bats/ -type f -exec bats {} + ; fi
+	if bats --version >/dev/null; then find tests/unit/bats/ -type f -exec bats {} + ; fi
