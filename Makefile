@@ -1,3 +1,7 @@
+# Copyright (C) 2017 Jonathan Matthews.
+# License: GNU General Public License version 2.
+# See LICENSE and LICENSE.GPL2
+
 .PHONY: help test bootstrap
 .DEFAULT_GOAL := help
 MAKEFLAGS     += --no-builtin-rules --no-builtin-variables --warn-undefined-variables
