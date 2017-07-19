@@ -1,6 +1,6 @@
 # Copyright (C) 2017 Jonathan Matthews.
 # License: GNU General Public License version 2.
-# See LICENSE and LICENSE.GPL2
+# See LICENSE.txt and LICENSE
 
 .PHONY: help test bootstrap
 .DEFAULT_GOAL := help
