@@ -10,6 +10,7 @@ hashbang    := shell
 main_script := main
 main_func   := functions/main
 functions   := $(filter-out $(main_func), $(wildcard functions/*))
+MOCKS       ?=
 mocks       ?= $(wildcard $(MOCKS))
 sources     := $(wildcard $(hashbang) $(main_func) $(functions) $(mocks) $(main_script))
 
