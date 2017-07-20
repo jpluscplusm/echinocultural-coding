@@ -2,7 +2,7 @@
 # License: GNU General Public License version 2.
 # See LICENSE.txt and LICENSE
 
-.PHONY: help test bootstrap
+.PHONY: help test bootstrap clean clean-bootstrap
 .DEFAULT_GOAL := help
 MAKEFLAGS     += --no-builtin-rules --no-builtin-variables --warn-undefined-variables
 
@@ -18,6 +18,8 @@ script: $(sources) ## Assembles the script
 	@chmod u+x $@
 test:
 -include tests/*.mk
+clean: clean-bootstrap ## Removes the script for e.g. after a mocked version has been built
+	rm -f script
 help:
 	@awk -F":.*## " '$$2&&$$1~/^[a-zA-Z_%-]+/{printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 

@@ -1,4 +1,4 @@
-.PHONY: clean release
+.PHONY: release
 
 candidate := release-candidate
 testdir   := $(candidate)-test
@@ -17,5 +17,5 @@ $(candidate): $(bootstrap) $(thisfile)
 	mv $(testdir)/$@ .
 	rm -rf $(testdir)
 
-clean:
+clean-bootstrap:
 	rm -rf $(candidate) $(testdir)
